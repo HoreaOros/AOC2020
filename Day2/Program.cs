@@ -40,5 +40,21 @@ Console.WriteLine(goodPasswords);
 #endregion
 
 #region Part2
+goodPasswords = 0;
+for (int i = 0; i < pwds.Count; i++)
+{
+    (n1, n2, letter, password) = pwds[i];
+    int count = 0;
+    //if ((password[n1 - 1] == letter && password[n2 - 1] != letter) ||
+    //    (password[n1 - 1] != letter && password[n2 - 1] == letter))
+    //    goodPasswords++;
+    if (password[n1 - 1] == letter)
+        count++;
+    if (password[n2 - 1] == letter)
+        count++;
+    if (count == 1)
+        goodPasswords++;
+}
+Console.WriteLine(goodPasswords);
 #endregion
 
