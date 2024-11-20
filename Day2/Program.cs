@@ -3,14 +3,14 @@ using System.Text.RegularExpressions;
 
 string text = File.ReadAllText("input.txt");
 string[] lines = text.Split(Environment.NewLine);
-Console.WriteLine();
-Regex r = new Regex("(\\d+)-(\\d+) ([a-z]): ([a-z]+)");
+
+Regex r = new Regex(@"(\d+)-(\d+) ([a-z]): ([a-z]+)");
 Match m;
 int n1, n2;
 char letter;
 string password;
 
-List <(int, int, char, string)> pwds= new ();
+List <(int n1, int n2, char letter, string pwd)> pwds = new ();
 
 foreach (string line in lines)
 {
@@ -30,9 +30,12 @@ for (int i = 0; i < pwds.Count; i++)
 {
     (n1, n2, letter, password) = pwds[i];
     int count = 0;
-    foreach (char c in password)
-        if (c == letter)
-            count++;
+    //foreach (char c in password)
+    //    if (c == letter)
+    //        count++;
+
+    count = password.Count(c => c == letter); // LINQ = Language Integrated Query
+    
     if (count >= n1 && count <= n2)
         goodPasswords++;
 }

@@ -7,10 +7,24 @@ for (int i = 0; i < numbers.Length; i++)
     nums[i] = int.Parse(numbers[i]);
 const int S = 2020;
 #endregion
-
-
-
+#region Part1
 Part1(nums, S);
+static void Part1(int[] nums, int S)
+{
+    int result = 0;
+    bool found = false;
+    for (int i = 0; !found && i < nums.Length; i++)
+        for (int j = i + 1; !found && j < nums.Length; j++)
+            if (nums[i] + nums[j] == S)
+            {
+                found = true;
+                result = nums[i] * nums[j];
+            }
+
+    Console.WriteLine(result);
+}
+#endregion
+#region Part2
 Part2(nums, S);
 
 void Part2(int[] nums, int s)
@@ -29,17 +43,4 @@ void Part2(int[] nums, int s)
     Console.WriteLine(result);
 }
 
-static void Part1(int[] nums, int S)
-{
-    int result = 0;
-    bool found = false;
-    for (int i = 0; !found && i < nums.Length; i++)
-        for (int j = i + 1; !found && j < nums.Length; j++)
-            if (nums[i] + nums[j] == S)
-            {
-                found = true;
-                result = nums[i] * nums[j];
-            }
-
-    Console.WriteLine(result);
-}
+#endregion
