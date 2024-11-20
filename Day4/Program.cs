@@ -78,11 +78,11 @@ bool checkHcl(string hcl)
     return m.Success;
 }
 
-bool checkHeight(string heigth)
+bool checkHeight(string height)
 {
     string pattern = "^(\\d+)(cm|in)$";
     Regex r = new Regex(pattern);
-    Match m = r.Match(heigth);
+    Match m = r.Match(height);
     if (!m.Success)
         return false;
     
