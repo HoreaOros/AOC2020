@@ -8,6 +8,7 @@ string[] seats = lines.Split(Environment.NewLine);
 int maxim = 0;
 // BBFBFBFLRL
 // 01100
+
 List<int> lst = new();
 foreach (string seat in seats)
 {
@@ -44,4 +45,6 @@ for(int i = 0; i < lst.Count - 1; i++)
         Console.WriteLine(lst[i] + 1);
 #endregion
 
+
+ 
 
