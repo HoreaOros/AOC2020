@@ -8,7 +8,7 @@ string text = File.ReadAllText("input.txt");
 //Regex regex = new Regex(pattern);
 
 string[] lines = text.Split(Environment.NewLine);
-Dictionary<string, List<(string, int)>> map = new();
+Dictionary<string, List<(string bag, int count)>> map = new();
 Regex r = new Regex(@"(\d+) ([a-z ]+) bags*");
 foreach (string line in lines)
 {
@@ -27,16 +27,16 @@ foreach (string line in lines)
     map.Add(key, lst);
 }
 
-Dictionary<string, List<(string, int)>> inverseMap = new();
+Dictionary<string, List<(string bag, int count)>> inverseMap = new();
 foreach(string key in map.Keys)
 {
     foreach(var v in map[key]) // lista de tuples (nod, count)
     {
-        string nod = v.Item1;
+        string nod = v.bag;
         if (!inverseMap.Keys.Contains(nod))
-            inverseMap.Add(nod, new List<(string, int)>() { (key, v.Item2) });
+            inverseMap.Add(nod, new List<(string, int)>() { (key, v.count) });
         else
-            inverseMap[nod].Add((key, v.Item2));
+            inverseMap[nod].Add((key, v.count));
     }
 }
 
@@ -53,13 +53,14 @@ void Part1(string start)
 {
     if(inverseMap.ContainsKey(start))
         foreach (var item in inverseMap[start])
-            if (!SEEN.Contains(item.Item1))
+            if (!SEEN.Contains(item.bag))
             {
-                SEEN.Add(item.Item1);
-                Part1(item.Item1);
+                SEEN.Add(item.bag);
+                Part1(item.bag);
             }
 }
-Console.WriteLine(SEEN.Count - 1);
+
+Console.WriteLine(SEEN.Count - 1); // -1 pt ca shiny gold nu trebuie numarat (a fost adaugat in SEEN la inceput)
 #endregion
 
 
@@ -74,9 +75,8 @@ long Part2(string start)
     long result = 0;
     foreach (var item in map[start])
     {
-        result = result + item.Item2 + item.Item2 * Part2(item.Item1);
+        result = result + item.count + item.count * Part2(item.bag);
     }
     return result;
 }
-
 #endregion
