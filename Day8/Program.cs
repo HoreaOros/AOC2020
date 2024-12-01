@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 string code = File.ReadAllText("input.txt");
 string[] lines = code.Split(Environment.NewLine);
 List<(string instr, int arg)> program = new();
-Regex r = new Regex(@"(acc|jmp|nop) ((?:\+|-)\d+)");
+Regex r = new Regex(@"(acc|jmp|nop) ((?:\+|-)[0-9]+)");
 foreach (string line in lines)
 {
     Match m = r.Match(line);
@@ -38,7 +38,7 @@ static (int, bool) Part1(List<(string instr, int arg)> program)
                 PC += currentInstr.arg;
                 break;
         }
-        if (PC == program.Count)
+        if (PC >= program.Count)
             return (accumulator, true);
     } while (!SEEN.Contains(PC));
     return (accumulator, false);

@@ -8,11 +8,12 @@ Console.WriteLine();
 int sum = 0;
 foreach (string group in groups)
 {
+    //HashSet<char> q = new HashSet<char>(group.Where(x => char.IsLetter(x)));
     HashSet<char> q = new HashSet<char>();
     foreach (char c in group)
         if(char.IsLetter(c))
             q.Add(c);
- 
+
     sum += q.Count;
 }
 Console.WriteLine(sum);
