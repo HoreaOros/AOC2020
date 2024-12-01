@@ -80,5 +80,44 @@ Console.WriteLine(Math.Abs(x) + Math.Abs(y));
 #endregion
 
 
-#region Part1
+#region Part2
+long shipX = 0, shipY = 0;
+long waypointX = 10, waypointY = 1, dx, dy;
+foreach(var item in lst)
+{
+    switch(item.command)
+    {
+        case 'N':
+            waypointY += item.value; break;
+        case 'S':
+            waypointY -= item.value; break;
+        case 'E':
+            waypointX += item.value; break;
+        case 'W':
+            waypointX -= item.value; break;
+        case 'L':
+            angle = item.value;
+            while (angle > 0)
+            {
+                (waypointX, waypointY) = (-waypointY, waypointX);
+                angle -= 90;
+            }
+            break;
+        case 'R':
+            angle = item.value;
+            while (angle > 0)
+            {
+                (waypointX, waypointY) = (waypointY, -waypointX);
+                angle -= 90;
+            }
+            break;
+        case 'F':
+            shipX += item.value * waypointX;
+            shipY += item.value * waypointY;
+            break;
+
+    }
+    Console.WriteLine($"{item.command}{item.value} Ship: X{shipX} Y{shipY} / Waypoint: X{waypointX} Y{waypointY}");
+}
+Console.WriteLine(Math.Abs(shipX) + Math.Abs(shipY));
 #endregion
